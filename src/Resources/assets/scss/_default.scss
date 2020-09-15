@@ -1,0 +1,86 @@
+.autocomplete_results_container {
+  padding-left: 0;
+  padding-right: 30px;
+  position: absolute;
+  z-index: 1000;
+  margin-top: -1rem;
+  min-width: 100%;
+  .autoComplete_result {
+    margin: 0 !important;
+    max-width: none !important;
+  }
+}
+
+.autoComplete_result {
+  margin: 0.15rem auto;
+  padding: 0.6rem;
+  max-width: 280px;
+  border: 0.05rem solid #e3e3e3;
+  list-style: none;
+  text-align: left;
+  font-size: 1.1rem;
+  color: map-get($theme-colors, black);
+  transition: all 0.1s ease-in-out;
+  background-color: #fff;
+}
+
+.autoComplete_result::selection {
+  color: rgba(#ffffff, 0);
+  background-color: rgba(#ffffff, 0);
+}
+
+.autoComplete_result:last-child {
+  border-radius: 0 0 1rem 1rem;
+}
+
+.autoComplete_result:hover {
+  cursor: pointer;
+  background-color: map-get($theme-colors, light);
+  border-left: 2px solid map-get($theme-colors, primary);
+  border-right: 2px solid map-get($theme-colors, primary);
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+
+.autoComplete_result:focus {
+  outline: none;
+  background-color: map-get($theme-colors, white);
+  border-left: 2px solid map-get($theme-colors, primary);
+  border-right: 2px solid map-get($theme-colors, primary);
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+
+.autoComplete_highlighted {
+  opacity: 1;
+  color: theme-color(primary);
+  font-weight: bold;
+}
+
+.autoComplete_highlighted::selection {
+  color: rgba(#ffffff, 0);
+  background-color: rgba(#ffffff, 0);
+}
+
+.autoComplete_selected {
+  cursor: pointer;
+  background-color: map-get($theme-colors, white);
+  border-left: 2px solid map-get($theme-colors, primary);
+  border-right: 2px solid map-get($theme-colors, primary);
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+
+@media only screen and (max-width: 600px) {
+    .autoComplete_result:first-child {
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .autoComplete_result:last-child {
+    border-radius: 0 0 1rem 1rem;
+  }
+
+  .autoComplete_result:only-child {
+    border-radius: 1rem;
+  }
+}

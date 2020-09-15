@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    public: true
+    autowire: true
+
+  huh.autocompletejs.manager.autocomplete_manager:
+    class: HeimrichHannot\AutocompletejsBundle\Manager\AutocompleteManager
+  HeimrichHannot\AutocompletejsBundle\Manager\AutocompleteManager: '@huh.autocompletejs.manager.autocomplete_manager'
+
+  HeimrichHannot\AutocompletejsBundle\Asset\FrontendAsset: ~

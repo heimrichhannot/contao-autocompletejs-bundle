@@ -1,0 +1,33 @@
+{
+    "name": "contao-autocompletejs-bundle",
+    "version": "1.0.0",
+    "description": "This bundle offers support for autoComplete.js for the Contao CMS.",
+    "author": "Heimrich & Hannot GmbH <digitales@heimrich-hannot.de>",
+    "license": "LGPL-3.0-or-later",
+    "dependencies": {
+        "@tarekraafat/autocomplete.js": "^7.2.0"
+    },
+    "devDependencies": {
+        "@symfony/webpack-encore": "^0.30",
+        "autoprefixer": "^9.1.5",
+        "node-sass": "^4.13.1",
+        "postcss-loader": "^3.0.0",
+        "sass-loader": "^8.0.0"
+    },
+    "scripts": {
+        "build-dev": "yarn encore dev",
+        "build-production": "yarn encore production"
+    },
+    "browserslist": [
+        "last 2 versions",
+        "not dead"
+    ],
+    "postcss": {
+        "plugins": {
+            "autoprefixer": {}
+        }
+    },
+    "jshintConfig": {
+        "esversion": 6
+    }
+}

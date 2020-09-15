@@ -1,0 +1,11 @@
+$pink: rgb(255, 122, 122) !default;
+$white: rgb(255,255,255) !default;
+$light: darken($white, 10%) !default;
+$black: rgb(0,0,0) !default;
+
+$theme-colors: (
+    primary: $pink,
+    white: $white,
+    black: $black,
+    light: $light
+) !default;

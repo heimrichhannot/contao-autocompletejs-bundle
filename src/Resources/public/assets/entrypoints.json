@@ -1,0 +1,17 @@
+{
+  "entrypoints": {
+    "contao-autocompletejs-bundle": {
+      "js": [
+        "/bundles/heimrichhannotautocompletejs/assets/contao-autocompletejs-bundle.js"
+      ]
+    },
+    "contao-autocompletejs-bundle-theme": {
+      "css": [
+        "/bundles/heimrichhannotautocompletejs/assets/contao-autocompletejs-bundle-theme.css"
+      ],
+      "js": [
+        "/bundles/heimrichhannotautocompletejs/assets/contao-autocompletejs-bundle-theme.js"
+      ]
+    }
+  }
+}

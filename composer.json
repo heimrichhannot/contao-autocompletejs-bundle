@@ -1,0 +1,57 @@
+{
+    "name": "heimrichhannot/contao-autocompletejs-bundle",
+    "type": "contao-bundle",
+    "homepage":"https://github.com/heimrichhannot/contao-autocompletejs-bundle",
+    "description": "This bundle offers support for autocomplete.js for the Contao CMS.",
+    "license": "LGPL-3.0-or-later",
+    "authors":[
+        {
+            "name":"Heimrich & Hannot",
+            "email":"digitales@heimrich-hannot.de",
+            "homepage":"http://www.heimrich-hannot.de",
+            "role":"Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "contao/core-bundle": "^4.4",
+        "heimrichhannot/contao-utils-bundle": "^2.177"
+    },
+    "require-dev": {
+        "contao/test-case": "1.1.*",
+        "contao/manager-plugin": "^2.0",
+        "friendsofphp/php-cs-fixer": "^2.2",
+        "phpunit/phpunit": ">=6.0 <6.5",
+        "phpunit/phpunit-mock-objects": "^4.0|^5.0",
+        "phpunit/php-token-stream": "^1.4|^2.0|^3.0",
+        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/message-factory": "^1.0.2",
+        "satooshi/php-coveralls": "^2.0",
+        "symfony/phpunit-bridge": "^3.2"
+    },
+    "suggest": {
+        "heimrichhannot/contao-encore-bundle": "^1.8 - Manage dependencies with Symfony Webpack Encore."
+    },
+    "autoload": {
+        "psr-4": {
+            "HeimrichHannot\\AutocompletejsBundle\\": "src/"
+        },
+        "classmap": [
+            "src/"
+        ],
+        "exclude-from-classmap": [
+            "src/Resources/contao/config/",
+            "src/Resources/contao/dca/",
+            "src/Resources/contao/languages/",
+            "src/Resources/contao/templates/"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "extra": {
+        "contao-manager-plugin": "HeimrichHannot\\AutocompletejsBundle\\ContaoManager\\Plugin",
+        "foxy": true
+    }
+}
