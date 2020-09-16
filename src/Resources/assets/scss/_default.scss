@@ -1,21 +1,14 @@
 .autocomplete_results_container {
   padding-left: 0;
-  padding-right: 30px;
   position: absolute;
   z-index: 1000;
-  margin-top: -1rem;
   min-width: 100%;
-  .autoComplete_result {
-    margin: 0 !important;
-    max-width: none !important;
-  }
 }
 
 .autoComplete_result {
-  margin: 0.15rem auto;
+  margin: 0;
   padding: 0.6rem;
-  max-width: 280px;
-  border: 0.05rem solid #e3e3e3;
+  border: 0.05rem solid map-get($theme-colors, light);
   list-style: none;
   text-align: left;
   font-size: 1.1rem;

@@ -47,8 +47,13 @@ debounce|Integer|idle time after entering new character (milliseconds)
 maxResults|Integer|maximum number of results shown in the dropdown menu
 highlight|Boolean|show entered characters in the results dropdown menu
 
-## JavaScript Events
-Following events can be used to further customize the choices instances: 
+## Events
+Event name | Description
+---|---
+CustomizeAutocompletejsOptionsEvent | Used to modify options provided from dca
+
+### JavaScript Events
+Following events can be used to further customize the autocompletejs instances: 
 
 Event name | Data | Description
 ---------- | ---- | -----------
