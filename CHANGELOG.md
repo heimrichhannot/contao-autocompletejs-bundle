@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2] - 2020-09-18
+- fixed javaScript dependencies
+
 ## [0.1.1] - 2020-09-16
 - fixed style
 - updated README.md

@@ -1,6 +1,6 @@
 huh_encore:
   js_entries:
-    - { name: "contao-autocompletejs-bundle", file: "vendor/heimrichhannot/contao-autocompletejs-bundle/src/Resources/assets/js/contao-autocompletejs-bundle.js" }
+    - { name: "contao-autocompletejs-bundle", file: "vendor/heimrichhannot/contao-autocompletejs-bundle/src/Resources/assets/js/contao-autocompletejs-bundle-init.js" }
     - { name: "contao-autocompletejs-bundle-theme", requires_css: true, file: "vendor/heimrichhannot/contao-autocompletejs-bundle/src/Resources/assets/js/contao-autocompletejs-bundle-theme.js" }
   unset_global_keys:
     js:
