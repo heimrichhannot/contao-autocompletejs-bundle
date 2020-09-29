@@ -89,6 +89,15 @@ class AutocompletejsBundle {
                 }
 
                 new autoComplete(options);
+
+                field.addEventListener('focus', (e) => {
+                    let results = document.querySelector('#autocomplete_'+field.id);
+                    results.classList.add('show');
+                } )
+                field.addEventListener('blur', (e) => {
+                    let results = document.querySelector('#autocomplete_'+field.id);
+                    results.classList.remove('show');
+                })
             })
         }
     }
