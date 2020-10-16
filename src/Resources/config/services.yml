@@ -7,4 +7,6 @@ services:
     class: HeimrichHannot\AutocompletejsBundle\Manager\AutocompleteManager
   HeimrichHannot\AutocompletejsBundle\Manager\AutocompleteManager: '@huh.autocompletejs.manager.autocomplete_manager'
 
-  HeimrichHannot\AutocompletejsBundle\Asset\FrontendAsset: ~
+  HeimrichHannot\AutocompletejsBundle\:
+    resource: "../../{Asset,Util}/*"
+    autoconfigure: true

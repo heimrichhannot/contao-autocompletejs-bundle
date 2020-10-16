@@ -12,6 +12,8 @@ use Contao\DataContainer;
 use Contao\PageModel;
 use HeimrichHannot\AutocompletejsBundle\Asset\FrontendAsset;
 use HeimrichHannot\AutocompletejsBundle\Event\CustomizeAutocompletejsOptionsEvent;
+use HeimrichHannot\AutocompletejsBundle\Util\AutocompleteUtil;
+use HeimrichHannot\UtilsBundle\Container\ContainerUtil;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -21,30 +23,24 @@ class GetAttributesFromDcaListener
      * @var bool
      */
     protected $closed = false;
-    private $pageParents = null;
     /**
-     * @var ContainerInterface
+     * @var AutocompleteUtil
      */
-    private $container;
+    private $autocompleteUtil;
     /**
-     * @var FrontendAsset
+     * @var ContainerUtil
      */
-    private $frontendAsset;
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
+    private $containerUtil;
 
     /**
      * GetAttributesFromDcaListener constructor.
      *
      * @param null $pageParents
      */
-    public function __construct(ContainerInterface $container, FrontendAsset $frontendAsset, EventDispatcherInterface $eventDispatcher)
+    public function __construct(AutocompleteUtil $autocompleteUtil, ContainerUtil $containerUtil)
     {
-        $this->container = $container;
-        $this->frontendAsset = $frontendAsset;
-        $this->eventDispatcher = $eventDispatcher;
+        $this->autocompleteUtil = $autocompleteUtil;
+        $this->containerUtil = $containerUtil;
     }
 
     public function close()
@@ -64,59 +60,16 @@ class GetAttributesFromDcaListener
      */
     public function onGetAttributesFromDca(array $attributes, $dc = null): array
     {
-        if ($this->closed || !$this->container->get('huh.utils.container')->isFrontend() || !\in_array($attributes['type'], ['select', 'text'])) {
+        if(!$attributes['autocompletejs']) {
+            return $attributes;
+        }
+
+        if ($this->closed || !$this->containerUtil->isFrontend() || !\in_array($attributes['type'], ['select', 'text'])) {
             $this->open();
 
             return $attributes;
         }
 
-        $this->getPageWithParents();
-
-        if (null !== $this->pageParents) {
-            if ('text' === $attributes['type']) {
-                $property = $this->container->get('huh.utils.dca')->getOverridableProperty('useAutocompletejsForText', $this->pageParents);
-
-                if (true === (bool) $property) {
-                    if ($attributes['autocompletejs']['active']) {
-                        $attributes['data-autocompletejs'] = true;
-                        $this->frontendAsset->addFrontendAssets();
-                    }
-                }
-            }
-        }
-
-        $customOptions = [];
-
-        if (isset($attributes['autocompletejs']['options']) && \is_array($attributes['autocompletejs']['options'])) {
-            $customOptions = $attributes['autocompletejs']['options'];
-        }
-
-        if ($attributes['autocompletejs']['active']) {
-            $customOptions = $this->container->get('huh.autocompletejs.manager.autocomplete_manager')->getOptionsAsArray($customOptions);
-        }
-        $event = $this->eventDispatcher->dispatch(CustomizeAutocompletejsOptionsEvent::NAME, new CustomizeAutocompletejsOptionsEvent(
-            $customOptions,
-            $attributes,
-            $dc
-        ));
-
-        if ($attributes['autocompletejs']['active']) {
-            $attributes['data-autocompletejs-options'] = json_encode($event->getAutocompletejsOptions());
-        }
-
-        return $attributes;
-    }
-
-    protected function getPageWithParents()
-    {
-        /* @var PageModel $objPage */
-        global $objPage;
-
-        if (null === $this->pageParents && null !== $objPage) {
-            $this->pageParents = $this->container->get('huh.utils.model')->findParentsRecursively('pid', 'tl_page', $objPage);
-            $this->pageParents[] = $objPage;
-        }
-
-        return $this->pageParents;
+        return array_merge($attributes, $this->autocompleteUtil->getAutocompleteConfig($attributes, $dc));
     }
 }

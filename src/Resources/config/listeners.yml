@@ -5,3 +5,7 @@ services:
 
    # Hook Listener
   HeimrichHannot\AutocompletejsBundle\EventListener\GetAttributesFromDcaListener: ~
+
+  HeimrichHannot\AutocompletejsBundle\EventListener\AdjustFilterOptionsEventListener:
+    tags:
+      - { name: kernel.event_listener, event: huh.filter.event.adjust_filter_options_event, method: '__invoke' }

@@ -39,7 +39,6 @@ class CustomizeAutocompletejsOptionsEvent extends Event
     {
         $this->autocompletejsOptions = $customOptions;
         $this->fieldAttributes = $fieldAttributes;
-        $this->dc = $dc;
     }
 
     public function getAutocompletejsOptions(): array

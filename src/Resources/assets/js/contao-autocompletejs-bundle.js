@@ -26,7 +26,6 @@ class AutocompletejsBundle {
                 options.resultItem = {
                     element: 'li',
                     content: (data, source) => {
-
                         source.innerHTML = data.match;
 
                         document.dispatchEvent(
@@ -44,8 +43,13 @@ class AutocompletejsBundle {
 
                 // CustomEvent to modify behavior on selecting an item
                 options.onSelection = (item) => {
+                    let value = item.selection.value;
 
-                    document.querySelector('#' + field.id).value = item.selection.value;
+                    if(item.selection.key) {
+                        value = item.selection.value[item.selection.key];
+                    }
+
+                    document.querySelector('#' + field.id).value = value;
 
                     document.dispatchEvent(
                         new CustomEvent('huh.autocompletejs.onselection', {
