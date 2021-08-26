@@ -37,6 +37,7 @@ Option name|Type|Value
 data|Array|type, url, key, cache
 data.type|String|'array','function'
 data.url|String|url to be fetched for data
+data.src|Array|array of values if autocomplete options are static values
 data.key|Array|keys of the data array if available
 data.cache|Boolean|cache the input
 searchEngine|String|'strict'

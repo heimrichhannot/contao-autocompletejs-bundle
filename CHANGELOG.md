@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased] - 2021-08-26
+- README.md enchancement
+
 ## [0.1.3] - 2020-09-29
 - fixed focus and blur of results_container to hide results if input looses focus
 
