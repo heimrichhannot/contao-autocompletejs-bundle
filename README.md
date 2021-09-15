@@ -37,6 +37,7 @@ Option name|Type|Value
 data|Array|type, url, key, cache
 data.type|String|'array','function'
 data.url|String|url to be fetched for data
+data.src|Array|array of values if autocomplete options are static values
 data.key|Array|keys of the data array if available
 data.cache|Boolean|cache the input
 searchEngine|String|'strict'
@@ -59,3 +60,13 @@ Event name | Data | Description
 ---------- | ---- | -----------
 huh.autocompletejs.adjust_result_item | field, item | Customize matched Item in the dropdown menu (`resultItem` configuration option of the autoComplete object)
 huh.autocompletejs.onselection | source, data | Customize selection behavior of selected Item (`onSelection` configuration options of the autoComplete object)
+
+### ***!!!Caution!!!*** Known limitations
+When fetching data via Controller make sure returning array is numerically consecutive indexed. Or if `key` option is used the array should not be numerically indexed at all. The JSON should never looks like this:
+```JSON
+{
+    "0" : {"key" : "value"},
+    "1" : {"key" : "value"},
+    "3" : {"key" : "value"}
+}
+```

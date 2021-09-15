@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.1] - 2021-09-15
+- README.md enchancement
+
 ## [0.2.0] - 2020-10-16
 - added support for huh_filter fields
 - added util for retrieving autocompletejs configuration for a field 
