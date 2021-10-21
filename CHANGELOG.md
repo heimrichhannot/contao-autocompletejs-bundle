@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.3] - 2021-10-21
+- Fixed: updated yarn dependencies and recompiled public folder
+
 ## [0.2.2] - 2021-10-20
 - Added: formhybrid_ajax_compelete eventlistener for js initialization
 
