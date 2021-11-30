@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.4] - 2021-11-30
+
+- Added: option value 'none'for searchEngine option
+
 ## [0.2.3] - 2021-10-21
 - Fixed: updated yarn dependencies and recompiled public folder
 

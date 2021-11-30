@@ -48,6 +48,12 @@ debounce|Integer|idle time after entering new character (milliseconds)
 maxResults|Integer|maximum number of results shown in the dropdown menu
 highlight|Boolean|show entered characters in the results dropdown menu
 
+### Custom configuration values
+This bundle has a new value for `searchEngine` option : 'none' 
+
+Set `searchEngine : 'none'` if no search algorithm should be applied to the result list. 
+This comes handy if your results are allready searched(eg. result list from an API)
+
 ## Events
 Event name | Description
 ---|---

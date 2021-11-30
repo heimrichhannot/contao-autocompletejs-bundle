@@ -27,7 +27,6 @@ class AutocompletejsBundle {
                     element: 'li',
                     content: (data, source) => {
                         source.innerHTML = data.match;
-
                         document.dispatchEvent(
                             new CustomEvent('huh.autocompletejs.adjust_result_item', {
                                 bubbles: true,
@@ -63,6 +62,13 @@ class AutocompletejsBundle {
                     );
                 }
 
+                // remove searchEngine if set to none
+                if (options.searchEngine === 'none') {
+                    options.searchEngine = (query, record) => {
+                        return record;
+                    }
+                }
+
                 // preparing settings from the dca field
                 if (!Array.isArray(options.data.src) && options.data.type === 'function') {
 
@@ -84,7 +90,6 @@ class AutocompletejsBundle {
                             if (err) {
                                 return err;
                             }
-
                             data = JSON.parse(res);
                         });
 
