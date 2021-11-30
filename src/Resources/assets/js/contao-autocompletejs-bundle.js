@@ -7,6 +7,18 @@ class AutocompletejsBundle {
             autocompleteFields.forEach((field) => {
                 let options = JSON.parse(field.dataset.autocompletejsOptions);
 
+                if (options.selector === '' && field.id !== '') {
+                    options.selector = '#'+field.id;
+                }
+
+                if (options.wrapper === '' && field.parentElement.classList.length !== 0) {
+                    let wrapperClass = '';
+                    field.parentElement.classList.forEach(cssClass => {
+                        wrapperClass += '.'+cssClass;
+                    })
+                    options.wrapper = wrapperClass;
+                }
+
                 // decrease threshold since
                 options.threshold = options.threshold - 1;
 

@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.5] - 2021-11-30
+
+- Added: support for multicolumn fields
+- Fixed: selector and wrapper assigenment if none is set
+
 ## [0.2.4] - 2021-11-30
 
 - Added: option value 'none'for searchEngine option
