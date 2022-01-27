@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.6] - 2022-01-27
+
+- Changed: delay autocomplete initiation
+
 ## [0.2.5] - 2021-11-30
 
 - Added: support for multicolumn fields
