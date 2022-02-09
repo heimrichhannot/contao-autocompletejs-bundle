@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2022-02-09
+
+- Updated: autocompletejs to v10.2.6
+- Updated: readme
+
 ## [0.2.6] - 2022-01-27
 
 - Changed: delay autocomplete initiation

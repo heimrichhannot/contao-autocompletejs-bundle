@@ -30,7 +30,7 @@ Add `autocompletejs` configuration to the `eval` array of dca field :
     ]
 ```
 
-Possible configuration options:
+Possible configuration options (see [more](https://tarekraafat.github.io/autoComplete.js/#/configuration)):
 
 Option name|Type|Value
 ---|----|---
@@ -39,8 +39,8 @@ data.type|String|'array','function'
 data.url|String|url to be fetched for data
 data.src|Array|array of values if autocomplete options are static values
 data.key|Array|keys of the data array if available
-data.cache|Boolean|cache the input
-searchEngine|String|'strict'
+data.cache|Boolean|cache the input, must be 'false' if data.type is a function
+searchEngine|String|'strict', 'loose' or 'none'
 placeHolder|String|placeholder of the input field
 selector|String|id of the input field
 threshold|Integer|minimum number of characters to trigger autocomplete

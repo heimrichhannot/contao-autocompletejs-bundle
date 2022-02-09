@@ -1,4 +1,4 @@
-import * as autoComplete from "@tarekraafat/autocomplete.js";
+import * as AutoComplete from "@tarekraafat/autocomplete.js";
 
 class AutocompletejsBundle {
     static init() {
@@ -6,18 +6,11 @@ class AutocompletejsBundle {
             let autocompleteFields = document.querySelectorAll("input[data-autocompletejs='1']");
             if (autocompleteFields.length !== 0) {
                 autocompleteFields.forEach((field) => {
+
                     let options = JSON.parse(field.dataset.autocompletejsOptions);
 
                     if (options.selector === '' && field.id !== '') {
                         options.selector = '#' + field.id;
-                    }
-
-                    if (options.wrapper === '' && field.parentElement.classList.length !== 0) {
-                        let wrapperClass = '';
-                        field.parentElement.classList.forEach(cssClass => {
-                            wrapperClass += '.' + cssClass;
-                        })
-                        options.wrapper = wrapperClass;
                     }
 
                     // decrease threshold since
@@ -25,55 +18,32 @@ class AutocompletejsBundle {
 
                     // configuration of the resultsList to prevent PAIN
                     options.resultsList = {
-                        render: true,
-                        container: source => {
-                            source.setAttribute('id', 'autocomplete_' + field.id);
-                            source.setAttribute('class', 'autocomplete_results_container');
-                        },
+                        tabSelection: true,
+                        id: 'autocomplete_' + field.id,
+                        class: 'autocomplete_results_container',
                         position: 'afterend',
-                        element: 'ul'
-                    }
+                        maxResults: options.maxResults || 5
+                    };
 
                     // configuration of resultItem
                     // with CustomEvent to modify results
                     options.resultItem = {
-                        element: 'li',
-                        content: (data, source) => {
-                            source.innerHTML = data.match;
+                        tag: 'li',
+                        class: 'autoComplete_result',
+                        element: (item, data) => {
+                            item.innerHTML = data.match;
                             document.dispatchEvent(
                                 new CustomEvent('huh.autocompletejs.adjust_result_item', {
                                     bubbles: true,
                                     cancelable: true,
                                     detail: {
-                                        source: source,
+                                        source: item,
                                         data: data
                                     }
                                 })
                             );
                         }
-                    }
-
-                    // CustomEvent to modify behavior on selecting an item
-                    options.onSelection = (item) => {
-                        let value = item.selection.value;
-
-                        if (item.selection.key) {
-                            value = item.selection.value[item.selection.key];
-                        }
-
-                        document.querySelector('#' + field.id).value = value;
-
-                        document.dispatchEvent(
-                            new CustomEvent('huh.autocompletejs.onselection', {
-                                bubbles: true,
-                                cancelable: true,
-                                detail: {
-                                    field: field,
-                                    item: item
-                                }
-                            })
-                        );
-                    }
+                    };
 
                     // remove searchEngine if set to none
                     if (options.searchEngine === 'none') {
@@ -86,18 +56,16 @@ class AutocompletejsBundle {
                     if (!Array.isArray(options.data.src) && options.data.type === 'function') {
 
                         if (!options.data.url) {
-                            return {};
+                            return [];
                         }
 
-                        let data = {};
+                        let data = [];
 
-                        options.data.src = () => {
-                            let query = document.querySelector('#' + field.id).value;
+                        options.data.src = (query) => {
 
                             if (query.length <= options.threshold) {
-                                return [];
+                                return Promise.resolve([]);
                             }
-
                             // fetch data if source-url is set
                             AutocompletejsBundle.getData(options.data.url.replace('{query}', query), (err, res) => {
                                 if (err) {
@@ -105,22 +73,44 @@ class AutocompletejsBundle {
                                 }
                                 data = JSON.parse(res);
                             });
-
-                            return data;
+                            return Promise.resolve(data);
                         };
                     }
 
-                    new autoComplete(options);
+                    new AutoComplete(options);
 
                     field.addEventListener('focus', (e) => {
                         let results = document.querySelector('#autocomplete_' + field.id);
                         results.classList.add('show');
-                    })
+                    });
+
                     field.addEventListener('blur', (e) => {
                         let results = document.querySelector('#autocomplete_' + field.id);
                         results.classList.remove('show');
-                    })
-                })
+                    });
+
+                    field.addEventListener('selection', e => {
+
+                        let value = e.detail.selection.value;
+
+                        if (options.data.key) {
+                            value = e.detail.selection.value[options.data.key[0]];
+                        }
+
+                        // document.querySelector('#' + field.id).value = value;
+                        field.value = value;
+                        document.dispatchEvent(
+                            new CustomEvent('huh.autocompletejs.onselection', {
+                                bubbles: true,
+                                cancelable: true,
+                                detail: {
+                                    field: field,
+                                    item: e.detail
+                                }
+                            })
+                        );
+                    });
+                });
             }
         }, 100);
 
