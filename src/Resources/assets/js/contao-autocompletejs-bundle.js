@@ -2,8 +2,14 @@ import * as AutoComplete from "@tarekraafat/autocomplete.js";
 
 class AutocompletejsBundle {
     static init() {
+
+        const turnOffAutocomplete = (node) => {
+            node.setAttribute('autocomplete', 'off');
+        }
+
         setTimeout(() => {
             let autocompleteFields = document.querySelectorAll("input[data-autocompletejs='1']");
+
             if (autocompleteFields.length !== 0) {
                 autocompleteFields.forEach((field) => {
 
@@ -12,6 +18,8 @@ class AutocompletejsBundle {
                     if (options.selector === '' && field.id !== '') {
                         options.selector = '#' + field.id;
                     }
+
+                    turnOffAutocomplete(field)
 
                     // decrease threshold since
                     options.threshold = options.threshold - 1;
@@ -31,7 +39,13 @@ class AutocompletejsBundle {
                         tag: 'li',
                         class: 'autoComplete_result',
                         element: (item, data) => {
-                            item.innerHTML = data.match;
+
+                            if(typeof data.match === 'object') {
+                                item.innerHTML = Object.values(data.match)[0];
+                            } else {
+                                item.innerHTML = data.match;
+                            }
+
                             document.dispatchEvent(
                                 new CustomEvent('huh.autocompletejs.adjust_result_item', {
                                     bubbles: true,
@@ -71,22 +85,21 @@ class AutocompletejsBundle {
                                 if (err) {
                                     return err;
                                 }
+
                                 data = JSON.parse(res);
                             });
                             return Promise.resolve(data);
                         };
                     }
 
-                    new AutoComplete(options);
+                    let autoComplete = new AutoComplete(options);
 
                     field.addEventListener('focus', (e) => {
-                        let results = document.querySelector('#autocomplete_' + field.id);
-                        results.classList.add('show');
+                        autoComplete .open();
                     });
 
                     field.addEventListener('blur', (e) => {
-                        let results = document.querySelector('#autocomplete_' + field.id);
-                        results.classList.remove('show');
+                        autoComplete .close();
                     });
 
                     field.addEventListener('selection', e => {

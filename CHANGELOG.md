@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1] - 2022-03-25
+
+- Added: turn off standard autocomplete on init 
+- Changed: use open/close methods, optimize result item
+
 ## [0.3.0] - 2022-02-09
 
 - Updated: autocompletejs to v10.2.6

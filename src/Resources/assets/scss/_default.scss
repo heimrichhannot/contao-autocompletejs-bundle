@@ -3,9 +3,9 @@
   position: absolute;
   z-index: 1000;
   min-width: 100%;
-  display: none;
-  &.show {
-    display: block;
+  display: block;
+  &[hidden] {
+    display: none;
   }
 }
 
