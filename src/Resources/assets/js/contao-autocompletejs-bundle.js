@@ -56,7 +56,8 @@ class AutocompletejsBundle {
                                     }
                                 })
                             );
-                        }
+                        },
+                        highlight: options.highlight
                     };
 
                     // remove searchEngine if set to none
