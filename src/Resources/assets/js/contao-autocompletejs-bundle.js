@@ -37,6 +37,7 @@ class AutocompletejsBundle {
                     // with CustomEvent to modify results
                     options.resultItem = {
                         tag: 'li',
+                        id: 'autoComplete_result_' + field.id,
                         class: 'autoComplete_result',
                         element: (item, data) => {
 

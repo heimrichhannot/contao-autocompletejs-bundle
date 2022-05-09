@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.3] - 2022-05-09
+
+- Fixed: duplicated result item id 
+
 ## [0.3.2] - 2022-05-03
 
 - Fixed: result item highlight
