@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.2 || ^8.0",
         "ext-json": "*",
         "contao/core-bundle": "^4.4",
         "heimrichhannot/contao-utils-bundle": "^2.177"
