@@ -14,7 +14,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 class CustomizeAutocompletejsOptionsEvent extends Event
 {
     /**
-     * @deprecated Use class FQCN as event name instead
+     * @deprecated Since 0.3.5. Use class FQCN as event name instead
      */
     public const NAME = 'huh.autocompletejs.customize_autocompletejs_options';
 

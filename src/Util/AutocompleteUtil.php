@@ -81,7 +81,7 @@ class AutocompleteUtil
          */
         if ($this->eventDispatcher->hasListeners(CustomizeAutocompletejsOptionsEvent::NAME)) {
             $this->eventDispatcher->dispatch($event, CustomizeAutocompletejsOptionsEvent::NAME);
-            trigger_deprecation('heimrichhannot/contao-autocompletejs-bundle', '0.3.4', 'Use FQCN as event name instead.');
+            trigger_deprecation('heimrichhannot/contao-autocompletejs-bundle', '0.3.5', 'Use FQCN as event name instead.');
         }
 
         $this->eventDispatcher->dispatch($event);
