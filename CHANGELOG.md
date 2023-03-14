@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased] - 2023-03-14
 - Changed: raised contao and php dependency
+- Deprecated: event name (use FQCN instead)
 - Fixed: symfony 5 compatibility
 
 ## [0.3.3] - 2022-05-09

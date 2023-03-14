@@ -1,8 +1,12 @@
 <?php
 
+/*
+ * Copyright (c) 2023 Heimrich & Hannot GmbH
+ *
+ * @license LGPL-3.0-or-later
+ */
 
 namespace HeimrichHannot\AutocompletejsBundle\Util;
-
 
 use Contao\DataContainer;
 use Contao\PageModel;
@@ -46,49 +50,54 @@ class AutocompleteUtil
     }
 
     /**
-     * get config data for autocompletejs
+     * get config data for autocompletejs.
      *
-     * @param array $attributes
      * @param DataContainer|null $dc
-     * @return array
      */
     public function getAutocompleteConfig(array $attributes = [], $dc = null): array
     {
-        if(empty($attributes) || !$attributes['autocompletejs']) {
+        if (empty($attributes) || !$attributes['autocompletejs']) {
             return [];
         }
 
-        if(!$attributes['autocompletejs']['active']) {
+        if (!$attributes['autocompletejs']['active']) {
             return [];
         }
 
-        if(null !== ($pages = $this->getPageWithParents())) {
+        if (null !== ($pages = $this->getPageWithParents())) {
             $this->addFrontendAssets($pages, $attributes);
         }
 
         $options = $this->autocompleteManager->getOptionsAsArray($attributes['autocompletejs']['options']);
 
-        $event = $this->eventDispatcher->dispatch(new CustomizeAutocompletejsOptionsEvent(
+        $event = new CustomizeAutocompletejsOptionsEvent(
             $options,
             $attributes,
             $dc
-        ), CustomizeAutocompletejsOptionsEvent::NAME);
+        );
+
+        /*
+         * @todo Removed in next major version
+         */
+        if ($this->eventDispatcher->hasListeners(CustomizeAutocompletejsOptionsEvent::NAME)) {
+            $this->eventDispatcher->dispatch($event, CustomizeAutocompletejsOptionsEvent::NAME);
+            trigger_deprecation('heimrichhannot/contao-autocompletejs-bundle', '0.3.4', 'Use FQCN as event name instead.');
+        }
+
+        $this->eventDispatcher->dispatch($event);
 
         return [
             'data-autocompletejs' => '1',
-            'data-autocompletejs-options' => json_encode($event->getAutocompletejsOptions())
+            'data-autocompletejs-options' => json_encode($event->getAutocompletejsOptions()),
         ];
     }
 
-    /**
-     * @return array|null
-     */
     protected function getPageWithParents(): ?array
     {
         /* @var PageModel $objPage */
         global $objPage;
 
-        if(null === $objPage) {
+        if (null === $objPage) {
             return null;
         }
 
@@ -98,18 +107,13 @@ class AutocompleteUtil
         return $pageParents;
     }
 
-    /**
-     *
-     * @param array $pages
-     * @param array $attributes
-     */
     protected function addFrontendAssets(array $pages, array &$attributes)
     {
-        if('text' !== $attributes['type']) {
+        if ('text' !== $attributes['type']) {
             return;
         }
 
-        if(false === ($property = $this->dcaUtil->getOverridableProperty('useAutocompletejsForText', $pages))) {
+        if (false === ($property = $this->dcaUtil->getOverridableProperty('useAutocompletejsForText', $pages))) {
             return;
         }
 

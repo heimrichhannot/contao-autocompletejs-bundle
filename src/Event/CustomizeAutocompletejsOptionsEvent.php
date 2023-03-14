@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2020 Heimrich & Hannot GmbH
+ * Copyright (c) 2023 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -13,7 +13,10 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class CustomizeAutocompletejsOptionsEvent extends Event
 {
-    const NAME = 'huh.autocompletejs.customize_autocompletejs_options';
+    /**
+     * @deprecated Use class FQCN as event name instead
+     */
+    public const NAME = 'huh.autocompletejs.customize_autocompletejs_options';
 
     /**
      * @var array

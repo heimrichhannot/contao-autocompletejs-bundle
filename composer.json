@@ -17,6 +17,7 @@
         "ext-json": "*",
         "contao/core-bundle": "^4.9",
         "heimrichhannot/contao-utils-bundle": "^2.177",
+        "symfony/deprecation-contracts": "^1.0 || ^2.0 || ^3.0",
         "symfony/event-dispatcher-contracts": "^1.0 || ^2.0 || ^3.0"
     },
     "suggest": {
