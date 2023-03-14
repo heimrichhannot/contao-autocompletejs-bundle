@@ -11,7 +11,7 @@ EOF;
 $finder = PhpCsFixer\Finder::create()
     ->exclude('Resources')
     ->exclude('Fixtures')
-    ->in([__DIR__.'/src', __DIR__.'/tests'])
+    ->in([__DIR__.'/src'])
 ;
 
 return PhpCsFixer\Config::create()
