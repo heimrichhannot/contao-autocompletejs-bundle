@@ -6,6 +6,7 @@ This bundle offers support for the JavaScript library [autoComplete.js](https://
 
 - activate autocompletejs support on page level (with inheritance and override option)
 - customize options from dca
+- [Encore Contracts](https://github.com/heimrichhannot/contao-encore-contracts) support
 
 ## Installation
 

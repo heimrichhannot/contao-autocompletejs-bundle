@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2020 Heimrich & Hannot GmbH
+ * Copyright (c) 2023 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -14,7 +14,6 @@ use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\ManagerPlugin\Config\ConfigPluginInterface;
 use HeimrichHannot\AutocompletejsBundle\HeimrichHannotAutocompletejsBundle;
-use HeimrichHannot\EncoreBundle\HeimrichHannotContaoEncoreBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
 class Plugin implements BundlePluginInterface, ConfigPluginInterface
@@ -26,10 +25,6 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface
     {
         $loadAfter = [ContaoCoreBundle::class];
 
-        if (class_exists('HeimrichHannot\EncoreBundle\HeimrichHannotContaoEncoreBundle')) {
-            $loadAfter[] = HeimrichHannotContaoEncoreBundle::class;
-        }
-
         return [
             BundleConfig::create(HeimrichHannotAutocompletejsBundle::class)->setLoadAfter($loadAfter),
         ];
@@ -37,9 +32,6 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface
 
     public function registerContainerConfiguration(LoaderInterface $loader, array $managerConfig)
     {
-        if (class_exists('HeimrichHannot\EncoreBundle\HeimrichHannotContaoEncoreBundle')) {
-            $loader->load('@HeimrichHannotAutocompletejsBundle/Resources/config/config_encore.yml');
-        }
         $loader->load('@HeimrichHannotAutocompletejsBundle/Resources/config/services.yml');
     }
 }

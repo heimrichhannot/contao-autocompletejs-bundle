@@ -16,29 +16,20 @@
         "php": "^7.4 || ^8.0",
         "ext-json": "*",
         "contao/core-bundle": "^4.9",
+        "heimrichhannot/contao-encore-contracts": "^1.0",
         "heimrichhannot/contao-utils-bundle": "^2.177",
         "symfony/deprecation-contracts": "^1.0 || ^2.0 || ^3.0",
         "symfony/event-dispatcher-contracts": "^1.0 || ^2.0 || ^3.0"
     },
     "suggest": {
-        "heimrichhannot/contao-encore-bundle": "^1.8 - Manage dependencies with Symfony Webpack Encore."
+        "heimrichhannot/contao-encore-bundle": "Manage dependencies with Symfony Webpack Encore."
     },
     "autoload": {
         "psr-4": {
             "HeimrichHannot\\AutocompletejsBundle\\": "src/"
-        },
-        "classmap": [
-            "src/"
-        ],
-        "exclude-from-classmap": [
-            "src/Resources/contao/config/",
-            "src/Resources/contao/dca/",
-            "src/Resources/contao/languages/",
-            "src/Resources/contao/templates/"
-        ]
+        }
     },
     "extra": {
-        "contao-manager-plugin": "HeimrichHannot\\AutocompletejsBundle\\ContaoManager\\Plugin",
-        "foxy": true
+        "contao-manager-plugin": "HeimrichHannot\\AutocompletejsBundle\\ContaoManager\\Plugin"
     }
 }

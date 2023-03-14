@@ -2,7 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2023-03-14
+## [0.3.4] - 2023-03-14
+- Added: EncoreContracts support
 - Changed: raised contao and php dependency
 - Deprecated: event name (use FQCN instead)
 - Fixed: symfony 5 compatibility
