@@ -8,39 +8,24 @@
 
 namespace HeimrichHannot\AutocompletejsBundle\EventListener;
 
+use Contao\CoreBundle\ServiceAnnotation\Hook;
 use Contao\DataContainer;
-use Contao\PageModel;
-use HeimrichHannot\AutocompletejsBundle\Asset\FrontendAsset;
-use HeimrichHannot\AutocompletejsBundle\Event\CustomizeAutocompletejsOptionsEvent;
 use HeimrichHannot\AutocompletejsBundle\Util\AutocompleteUtil;
-use HeimrichHannot\UtilsBundle\Container\ContainerUtil;
-use Psr\Container\ContainerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use HeimrichHannot\UtilsBundle\Util\Utils;
 
+/**
+ * @Hook("getAttributesFromDca")
+ */
 class GetAttributesFromDcaListener
 {
-    /**
-     * @var bool
-     */
-    protected $closed = false;
-    /**
-     * @var AutocompleteUtil
-     */
-    private $autocompleteUtil;
-    /**
-     * @var ContainerUtil
-     */
-    private $containerUtil;
+    protected bool $closed = false;
+    private AutocompleteUtil $autocompleteUtil;
+    private Utils $utils;
 
-    /**
-     * GetAttributesFromDcaListener constructor.
-     *
-     * @param null $pageParents
-     */
-    public function __construct(AutocompleteUtil $autocompleteUtil, ContainerUtil $containerUtil)
+    public function __construct(AutocompleteUtil $autocompleteUtil, Utils $utils)
     {
         $this->autocompleteUtil = $autocompleteUtil;
-        $this->containerUtil = $containerUtil;
+        $this->utils = $utils;
     }
 
     public function close()
@@ -54,17 +39,15 @@ class GetAttributesFromDcaListener
     }
 
     /**
-     * @Hook("getAttributesFromDca")
-     *
      * @param DataContainer $dc
      */
-    public function onGetAttributesFromDca(array $attributes, $dc = null): array
+    public function __invoke(array $attributes, $dc = null): array
     {
-        if(!$attributes['autocompletejs']) {
+        if(!($attributes['autocompletejs'] ?? false)) {
             return $attributes;
         }
 
-        if ($this->closed || !$this->containerUtil->isFrontend() || !\in_array($attributes['type'], ['select', 'text'])) {
+        if ($this->closed || !$this->utils->container()->isFrontend() || !\in_array($attributes['type'], ['select', 'text'])) {
             $this->open();
 
             return $attributes;

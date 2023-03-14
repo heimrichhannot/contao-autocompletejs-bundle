@@ -9,7 +9,7 @@
 namespace HeimrichHannot\AutocompletejsBundle\Event;
 
 use Contao\DataContainer;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class CustomizeAutocompletejsOptionsEvent extends Event
 {

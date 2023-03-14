@@ -6,7 +6,11 @@ namespace HeimrichHannot\AutocompletejsBundle\EventListener;
 
 use HeimrichHannot\AutocompletejsBundle\Util\AutocompleteUtil;
 use HeimrichHannot\FilterBundle\Event\AdjustFilterOptionsEvent;
+use Terminal42\ServiceAnnotationBundle\Annotation\ServiceTag;
 
+/**
+ * @ServiceTag("kernel.event_listener", event="huh.filter.event.adjust_filter_options_event")
+ */
 class AdjustFilterOptionsEventListener
 {
     /**

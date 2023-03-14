@@ -41,6 +41,5 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface
             $loader->load('@HeimrichHannotAutocompletejsBundle/Resources/config/config_encore.yml');
         }
         $loader->load('@HeimrichHannotAutocompletejsBundle/Resources/config/services.yml');
-        $loader->load('@HeimrichHannotAutocompletejsBundle/Resources/config/listeners.yml');
     }
 }

@@ -8,5 +8,5 @@ services:
   HeimrichHannot\AutocompletejsBundle\Manager\AutocompleteManager: '@huh.autocompletejs.manager.autocomplete_manager'
 
   HeimrichHannot\AutocompletejsBundle\:
-    resource: "../../{Asset,Util}/*"
+    resource: "../../{Asset,EventListener,Util}/*"
     autoconfigure: true

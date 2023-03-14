@@ -68,11 +68,11 @@ class AutocompleteUtil
 
         $options = $this->autocompleteManager->getOptionsAsArray($attributes['autocompletejs']['options']);
 
-        $event = $this->eventDispatcher->dispatch(CustomizeAutocompletejsOptionsEvent::NAME, new CustomizeAutocompletejsOptionsEvent(
+        $event = $this->eventDispatcher->dispatch(new CustomizeAutocompletejsOptionsEvent(
             $options,
             $attributes,
             $dc
-        ));
+        ), CustomizeAutocompletejsOptionsEvent::NAME);
 
         return [
             'data-autocompletejs' => '1',

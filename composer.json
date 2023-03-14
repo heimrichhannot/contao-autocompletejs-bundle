@@ -13,22 +13,11 @@
         }
     ],
     "require": {
-        "php": "^7.2||^8.0",
+        "php": "^7.4 || ^8.0",
         "ext-json": "*",
-        "contao/core-bundle": "^4.4",
-        "heimrichhannot/contao-utils-bundle": "^2.177"
-    },
-    "require-dev": {
-        "contao/test-case": "1.1.*",
-        "contao/manager-plugin": "^2.0",
-        "friendsofphp/php-cs-fixer": "^2.2",
-        "phpunit/phpunit": ">=6.0 <6.5",
-        "phpunit/phpunit-mock-objects": "^4.0|^5.0",
-        "phpunit/php-token-stream": "^1.4|^2.0|^3.0",
-        "php-http/guzzle6-adapter": "^1.1",
-        "php-http/message-factory": "^1.0.2",
-        "satooshi/php-coveralls": "^2.0",
-        "symfony/phpunit-bridge": "^3.2"
+        "contao/core-bundle": "^4.9",
+        "heimrichhannot/contao-utils-bundle": "^2.177",
+        "symfony/event-dispatcher-contracts": "^1.0 || ^2.0 || ^3.0"
     },
     "suggest": {
         "heimrichhannot/contao-encore-bundle": "^1.8 - Manage dependencies with Symfony Webpack Encore."
@@ -46,9 +35,6 @@
             "src/Resources/contao/languages/",
             "src/Resources/contao/templates/"
         ]
-    },
-    "config": {
-        "preferred-install": "dist"
     },
     "extra": {
         "contao-manager-plugin": "HeimrichHannot\\AutocompletejsBundle\\ContaoManager\\Plugin",
