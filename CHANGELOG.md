@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.6] - 2023-03-20
+- Fixed: warnings with php 8
+
 ## [0.3.5] - 2023-03-14
 - Added: EncoreContracts support
 - Changed: raised contao and php dependency
