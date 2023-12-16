@@ -15,7 +15,7 @@ class AutocompletejsBundle {
 
                     let options = JSON.parse(field.dataset.autocompletejsOptions);
 
-                    if (options.selector === '' && field.id !== '') {
+                    if (typeof options.selector === 'undefined' && typeof field.id !== 'undefined') {
                         options.selector = '#' + field.id;
                     }
 
@@ -97,11 +97,11 @@ class AutocompletejsBundle {
                     let autoComplete = new AutoComplete(options);
 
                     field.addEventListener('focus', (e) => {
-                        autoComplete .open();
+                        autoComplete.open();
                     });
 
                     field.addEventListener('blur', (e) => {
-                        autoComplete .close();
+                        autoComplete.close();
                     });
 
                     field.addEventListener('selection', e => {

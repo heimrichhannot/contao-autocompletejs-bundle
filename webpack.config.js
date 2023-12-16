@@ -4,7 +4,7 @@ Encore
 .setOutputPath('src/Resources/public/assets')
 .setPublicPath('/bundles/heimrichhannotautocompletejs/assets/')
 .setManifestKeyPrefix('bundles/heimrichhannotautocompletejs/assets')
-.addEntry('contao-autocompletejs-bundle', './src/Resources/assets/js/contao-autocompletejs-bundle.js')
+.addEntry('contao-autocompletejs-bundle', './src/Resources/assets/js/contao-autocompletejs-bundle-init.js')
 .addEntry('contao-autocompletejs-bundle-theme', './src/Resources/assets/js/contao-autocompletejs-bundle-theme.js')
 .disableSingleRuntimeChunk()
 .splitEntryChunks()

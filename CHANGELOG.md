@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.7] - 2023-12-16
+- Fixed: js issues for non-encore mode
+
 ## [0.3.6] - 2023-03-20
 - Fixed: warnings with php 8
 
