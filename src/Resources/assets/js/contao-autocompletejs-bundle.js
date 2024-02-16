@@ -97,7 +97,7 @@ class AutocompletejsBundle {
                     let autoComplete = new AutoComplete(options);
 
                     field.addEventListener('focus', (e) => {
-                        autoComplete.open();
+                        autoComplete.start();
                     });
 
                     field.addEventListener('blur', (e) => {

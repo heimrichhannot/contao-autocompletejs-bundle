@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.8] - 2024-02-16
+- Fixed: replaced open() by start() in focus listener
+
 ## [0.3.7] - 2023-12-16
 - Fixed: js issues for non-encore mode
 
