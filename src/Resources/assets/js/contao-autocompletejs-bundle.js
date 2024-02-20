@@ -30,7 +30,7 @@ class AutocompletejsBundle {
                         id: 'autocomplete_' + field.id,
                         class: 'autocomplete_results_container',
                         position: 'afterend',
-                        maxResults: options.maxResults || 5
+                        maxResults: options.resultsList.maxResults || 5
                     };
 
                     // configuration of resultItem
