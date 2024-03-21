@@ -51,7 +51,7 @@ class AdjustFilterOptionsEventListener
         }
 
         return [
-            'type' => $dcaField['inputType'],
+            'type' => ($dcaField['inputType'] ?? null),
             'autocompletejs' => $dcaField['eval']['autocompletejs'],
         ];
     }

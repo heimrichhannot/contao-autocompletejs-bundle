@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.10] - 2024-03-21
+- Fixed: warnings
+
 ## [0.3.9] - 2024-02-20
 - Fixed: maxResults property
 
