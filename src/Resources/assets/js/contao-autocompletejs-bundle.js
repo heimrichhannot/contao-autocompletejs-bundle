@@ -138,19 +138,6 @@ class AutocompletejsBundle {
 
         options.data = data;
     }
-
-    static getData(url, cb) {
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET', encodeURI(url), false);
-        xhr.onload = () => {
-            if (xhr.status === 200) {
-                cb(null, xhr.response);
-            } else {
-                cb(xhr.status, xhr.response);
-            }
-        };
-        xhr.send();
-    }
 }
 
 export {AutocompletejsBundle};
