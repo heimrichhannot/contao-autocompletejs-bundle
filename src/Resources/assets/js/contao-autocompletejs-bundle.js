@@ -5,7 +5,7 @@ class AutocompletejsBundle {
 
         const turnOffAutocomplete = (node) => {
             node.setAttribute('autocomplete', 'off');
-        }
+        };
 
         setTimeout(() => {
             let autocompleteFields = document.querySelectorAll("input[data-autocompletejs='1']");
@@ -19,10 +19,16 @@ class AutocompletejsBundle {
                         options.selector = '#' + field.id;
                     }
 
-                    turnOffAutocomplete(field)
+                    turnOffAutocomplete(field);
+
+                    this.configureData(options);
+
 
                     // decrease threshold since
                     options.threshold = options.threshold - 1;
+
+                    let maxResults = (options.resultsList && options.resultsList.maxResults) ? options.resultsList.maxResults : options.maxResults ?? 5;
+                    delete options.maxResults;
 
                     // configuration of the resultsList to prevent PAIN
                     options.resultsList = {
@@ -30,7 +36,7 @@ class AutocompletejsBundle {
                         id: 'autocomplete_' + field.id,
                         class: 'autocomplete_results_container',
                         position: 'afterend',
-                        maxResults: options.resultsList.maxResults || 5
+                        maxResults: maxResults,
                     };
 
                     // configuration of resultItem
@@ -65,32 +71,6 @@ class AutocompletejsBundle {
                     if (options.searchEngine === 'none') {
                         options.searchEngine = (query, record) => {
                             return record;
-                        }
-                    }
-
-                    // preparing settings from the dca field
-                    if (!Array.isArray(options.data.src) && options.data.type === 'function') {
-
-                        if (!options.data.url) {
-                            return [];
-                        }
-
-                        let data = [];
-
-                        options.data.src = (query) => {
-
-                            if (query.length <= options.threshold) {
-                                return Promise.resolve([]);
-                            }
-                            // fetch data if source-url is set
-                            AutocompletejsBundle.getData(options.data.url.replace('{query}', query), (err, res) => {
-                                if (err) {
-                                    return err;
-                                }
-
-                                data = JSON.parse(res);
-                            });
-                            return Promise.resolve(data);
                         };
                     }
 
@@ -129,6 +109,34 @@ class AutocompletejsBundle {
             }
         }, 100);
 
+    }
+
+    static configureData(options) {
+        let data = options.data;
+
+        // fallback for data.url. Could be removed or better implemented in the future
+        if (!('src' in data) && ('url' in data)) {
+            let url = data.url;
+            data.src = async (query) => {
+                try {
+                    const source = await fetch(url.replace('{query}', query));
+                    console.log(source);
+                    let result = await source.json();
+                    return result;
+                    // return await source.json();
+                } catch (error) {
+                    return error;
+                }
+            };
+            delete data.url;
+        }
+
+        if ('key' in data && !('keys' in data)) {
+            console.log('Using data.key is deprecated. Please use data.keys instead.');
+            data.keys = data.key;
+        }
+
+        options.data = data;
     }
 
     static getData(url, cb) {

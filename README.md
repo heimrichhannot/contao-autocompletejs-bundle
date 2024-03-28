@@ -16,7 +16,7 @@ Install via composer: `composer require heimrichhannot/contao-autocompletejs-bun
 
 Active or deactivate autocompletejs support on page level (Layout section). You can overwrite settings from a parent page.
 
-## Configuration
+### DCA configuration
 To activate autocompletejs on a dca field add  
 
 Add `autocompletejs` configuration to the `eval` array of dca field :
@@ -31,23 +31,57 @@ Add `autocompletejs` configuration to the `eval` array of dca field :
     ]
 ```
 
-Possible configuration options (see [more](https://tarekraafat.github.io/autoComplete.js/#/configuration)):
+### Example: load data from an API
 
-Option name|Type|Value
----|----|---
-data|Array|type, url, key, cache
-data.type|String|'array','function'
-data.url|String|url to be fetched for data
-data.src|Array|array of values if autocomplete options are static values
-data.key|Array|keys of the data array if available
-data.cache|Boolean|cache the input, must be 'false' if data.type is a function
-searchEngine|String|'strict', 'loose' or 'none'
-placeHolder|String|placeholder of the input field
-selector|String|id of the input field
-threshold|Integer|minimum number of characters to trigger autocomplete
-debounce|Integer|idle time after entering new character (milliseconds) 
-maxResults|Integer|maximum number of results shown in the dropdown menu
-highlight|Boolean|show entered characters in the results dropdown menu
+```php
+    'fieldName' => [
+        'eval' = [
+            'autocompletejs' => [ 
+                'active' => true,
+                'options' => [
+                    'data' => [
+                        'url' => 'https://example.org/users/{query}',
+                        'keys' => ['name', 'city'],
+                    ]
+                ]
+            ]
+        ]
+    ]
+```
+
+Return value of the api must be an array of objects. The object keys defined in `data.keys` will be used to display the results.
+
+```json
+[
+    {
+        "name": "John Doe",
+        "city": "New York"
+    },
+    {
+        "name": "Jane Doe",
+        "city": "Los Angeles"
+    }
+]
+```
+
+### Configuration options
+
+| Option name  | Type    | Value                                                       |
+|--------------|---------|-------------------------------------------------------------|
+| data         | Array   | type, url, key, cache                                       |
+| data.url     | String  | url to be fetched for data                                  |
+| data.src     | Array   | array of values if autocomplete options are static values   |
+| data.keys    | Array   | keys of the data array if available                         |
+| data.cache   | Boolean | cache the input, must be 'false' if data.type is a function |
+| searchEngine | String  | 'strict', 'loose' or 'none'                                 |
+| placeHolder  | String  | placeholder of the input field                              |
+| selector     | String  | id of the input field                                       |
+| threshold    | Integer | minimum number of characters to trigger autocomplete        |
+| debounce     | Integer | idle time after entering new character (milliseconds)       |
+| maxResults   | Integer | maximum number of results shown in the dropdown menu        |
+| highlight    | Boolean | show entered characters in the results dropdown menu        |
+
+You can also set all options of the library (see [more](https://tarekraafat.github.io/autoComplete.js/#/configuration)).
 
 ### Custom configuration values
 This bundle has a new value for `searchEngine` option : 'none' 
@@ -56,9 +90,9 @@ Set `searchEngine : 'none'` if no search algorithm should be applied to the resu
 This comes handy if your results are allready searched(eg. result list from an API)
 
 ## Events
-Event name | Description
----|---
-CustomizeAutocompletejsOptionsEvent | Used to modify options provided from dca
+| Event name                          | Description                              |
+|-------------------------------------|------------------------------------------|
+| CustomizeAutocompletejsOptionsEvent | Used to modify options provided from dca |
 
 ### JavaScript Events
 Following events can be used to further customize the autocompletejs instances: 
