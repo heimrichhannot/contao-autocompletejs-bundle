@@ -21,7 +21,7 @@ class AutocompletejsBundle {
 
                     turnOffAutocomplete(field);
 
-                    this.configureData(options);
+                    AutocompletejsBundle.configureData(options);
 
 
                     // decrease threshold since
