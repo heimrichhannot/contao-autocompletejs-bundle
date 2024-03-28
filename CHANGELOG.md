@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.11] - 2024-03-28
+- Fixed: maxResults option not working properly
+- Deprecated: config option data.key (use data.keys instead)
+- Removed: config option data.type (not used anymore)
+
 ## [0.3.10] - 2024-03-21
 - Fixed: warnings
 

@@ -8,11 +8,11 @@
         "@tarekraafat/autocomplete.js": "^10.2.6"
     },
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.30",
+        "@symfony/webpack-encore": "^1.8",
         "autoprefixer": "^9.1.5",
-        "node-sass": "^4.13.1",
-        "postcss-loader": "^3.0.0",
-        "sass-loader": "^8.0.0"
+        "postcss-loader": "^6.0.0",
+        "sass": "^1.26",
+        "sass-loader": "^12.0.0"
     },
     "scripts": {
         "build-dev": "yarn encore dev",
