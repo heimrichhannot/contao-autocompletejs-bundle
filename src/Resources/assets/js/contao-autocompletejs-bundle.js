@@ -88,8 +88,8 @@ class AutocompletejsBundle {
 
                         let value = e.detail.selection.value;
 
-                        if (options.data.key) {
-                            value = e.detail.selection.value[options.data.key[0]];
+                        if (options.data.keys) {
+                            value = e.detail.selection.value[options.data.keys[0]];
                         }
 
                         // document.querySelector('#' + field.id).value = value;
@@ -120,7 +120,7 @@ class AutocompletejsBundle {
             data.src = async (query) => {
                 try {
                     const source = await fetch(url.replace('{query}', query));
-                    console.log(source);
+                    // console.log(source);
                     let result = await source.json();
                     return result;
                     // return await source.json();

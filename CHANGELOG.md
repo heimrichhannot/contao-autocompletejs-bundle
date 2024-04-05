@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.13] - 2024-04-05
+- Fixed: on select result item
+
 ## [0.3.12] - 2024-03-28
 - Fixed: js error
 
