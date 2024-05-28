@@ -2,8 +2,6 @@ import autoComplete from "@tarekraafat/autocomplete.js/src/autoComplete.js";
 
 class AutocompletejsBundle {
     static init() {
-        console.log('init')
-
         const turnOffAutocomplete = (node) => {
             node.setAttribute('autocomplete', 'off');
         };
