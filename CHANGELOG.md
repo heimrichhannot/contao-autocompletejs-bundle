@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.14] - 2024-05-28
+- Fixed: now using default field when no selector is given
+
 ## [0.3.13] - 2024-04-05
 - Fixed: on select result item
 
