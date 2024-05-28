@@ -1,7 +1,8 @@
-import * as AutoComplete from "@tarekraafat/autocomplete.js";
+import autoComplete from "@tarekraafat/autocomplete.js/src/autoComplete.js";
 
 class AutocompletejsBundle {
     static init() {
+        console.log('init')
 
         const turnOffAutocomplete = (node) => {
             node.setAttribute('autocomplete', 'off');
@@ -13,25 +14,28 @@ class AutocompletejsBundle {
             if (autocompleteFields.length !== 0) {
                 autocompleteFields.forEach((field) => {
 
-                    let options = JSON.parse(field.dataset.autocompletejsOptions);
+                    let ctx = JSON.parse(field.dataset.autocompletejsOptions);
 
-                    if (typeof options.selector === 'undefined' && typeof field.id !== 'undefined') {
-                        options.selector = '#' + field.id;
+                    if (!ctx.selector) {
+                        if (typeof ctx.selector === 'undefined' && typeof field.id !== 'undefined') {
+                            ctx.selector = '#' + field.id;
+                        } else {
+                            ctx.selector = () => field;
+                        }
                     }
 
                     turnOffAutocomplete(field);
 
-                    AutocompletejsBundle.configureData(options);
-
+                    AutocompletejsBundle.configureData(ctx);
 
                     // decrease threshold since
-                    options.threshold = options.threshold - 1;
+                    ctx.threshold = ctx.threshold - 1;
 
-                    let maxResults = (options.resultsList && options.resultsList.maxResults) ? options.resultsList.maxResults : options.maxResults ?? 5;
-                    delete options.maxResults;
+                    let maxResults = (ctx.resultsList && ctx.resultsList.maxResults) ? ctx.resultsList.maxResults : ctx.maxResults ?? 5;
+                    delete ctx.maxResults;
 
                     // configuration of the resultsList to prevent PAIN
-                    options.resultsList = {
+                    ctx.resultsList = {
                         tabSelection: true,
                         id: 'autocomplete_' + field.id,
                         class: 'autocomplete_results_container',
@@ -41,7 +45,7 @@ class AutocompletejsBundle {
 
                     // configuration of resultItem
                     // with CustomEvent to modify results
-                    options.resultItem = {
+                    ctx.resultItem = {
                         tag: 'li',
                         id: 'autoComplete_result_' + field.id,
                         class: 'autoComplete_result',
@@ -64,32 +68,32 @@ class AutocompletejsBundle {
                                 })
                             );
                         },
-                        highlight: options.highlight
+                        highlight: ctx.highlight
                     };
 
                     // remove searchEngine if set to none
-                    if (options.searchEngine === 'none') {
-                        options.searchEngine = (query, record) => {
+                    if (ctx.searchEngine === 'none') {
+                        ctx.searchEngine = (query, record) => {
                             return record;
                         };
                     }
 
-                    let autoComplete = new AutoComplete(options);
+                    let ac = new autoComplete(ctx);
 
                     field.addEventListener('focus', (e) => {
-                        autoComplete.start();
+                        ac.start();
                     });
 
                     field.addEventListener('blur', (e) => {
-                        autoComplete.close();
+                        ac.close();
                     });
 
                     field.addEventListener('selection', e => {
 
                         let value = e.detail.selection.value;
 
-                        if (options.data.keys) {
-                            value = e.detail.selection.value[options.data.keys[0]];
+                        if (ctx.data.keys) {
+                            value = e.detail.selection.value[ctx.data.keys[0]];
                         }
 
                         // document.querySelector('#' + field.id).value = value;
