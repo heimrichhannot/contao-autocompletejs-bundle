@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.15] - 2024-05-29
+- Removed: unnecessary debug log
+- Changed: refactored js
+
 ## [0.3.14] - 2024-05-28
 - Fixed: now using default field when no selector is given
 
