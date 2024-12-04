@@ -129,17 +129,15 @@ class AutocompletejsBundle {
         // fallback for data.url. Could be removed or better implemented in the future
         if (!('src' in data) && ('url' in data)) {
             let url = data.url;
-            data.src = async (query) => {
+            async function fetchResult(query) {
                 try {
                     const source = await fetch(url.replace('{query}', query));
-                    // console.log(source);
-                    let result = await source.json();
-                    return result;
-                    // return await source.json();
+                    return await source.json();
                 } catch (error) {
                     return error;
                 }
-            };
+            }
+            data.src = fetchResult;
             delete data.url;
         }
 
