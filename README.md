@@ -31,7 +31,7 @@ Add `autocompletejs` configuration to the `eval` array of dca field :
     ]
 ```
 
-### Example: load data from an API
+#### Example: load data from an API
 
 ```php
     'fieldName' => [
@@ -64,7 +64,7 @@ Return value of the api must be an array of objects. The object keys defined in 
 ]
 ```
 
-### Configuration options
+#### Configuration options
 
 | Option name  | Type    | Value                                                       |
 |--------------|---------|-------------------------------------------------------------|
@@ -83,11 +83,28 @@ Return value of the api must be an array of objects. The object keys defined in 
 
 You can also set all options of the library (see [more](https://tarekraafat.github.io/autoComplete.js/#/configuration)).
 
-### Custom configuration values
+#### Custom configuration values
 This bundle has a new value for `searchEngine` option : 'none' 
 
 Set `searchEngine : 'none'` if no search algorithm should be applied to the result list. 
 This comes handy if your results are allready searched(eg. result list from an API)
+
+### Styling
+
+A number of custom css properties is available to style the autocompletejs dropdown menu. 
+
+The following properties define the overall theme of the dropdown menu and can be overridden for easy styling:
+
+```css
+.root {
+    --huh-autocomplete-clr-text: black;
+    --huh-autocomplete-clr-bg: white;
+    --huh-autocomplete-clr-bg-hover: whitesmoke;
+    --huh-autocomplete-clr-border: var(--bs-primary, var(--huh-autocomplete-clr-text, black));
+}
+```
+
+Take a look at [autocomplete-bundle.scss](src/Resources/assets/scss/autocomplete-bundle.scss) for a list of all available css properties for further customization.
 
 ## Events
 | Event name                          | Description                              |
