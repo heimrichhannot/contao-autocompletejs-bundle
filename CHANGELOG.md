@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+# [0.3.17] - 2024-12-05
+- Fixed: js error involving async function declaration
+
 ## [0.3.16] - 2024-12-04
 - Fixed: js error involving anonymous function declaration
 - Fixed: ugly styling of result items

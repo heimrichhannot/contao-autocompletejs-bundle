@@ -129,6 +129,8 @@ class AutocompletejsBundle {
         // fallback for data.url. Could be removed or better implemented in the future
         if (!('src' in data) && ('url' in data)) {
             let url = data.url;
+            /*
+            // this causes issues with the webpack build, as a polyfill makes this function synchronous
             async function fetchResult(query) {
                 try {
                     const source = await fetch(url.replace('{query}', query));
@@ -137,7 +139,30 @@ class AutocompletejsBundle {
                     return error;
                 }
             }
-            data.src = fetchResult;
+            */
+            function syncFetchResult(query) {
+                const xhr = new XMLHttpRequest();
+                let result;
+
+                const finalUrl = url.replace('{query}', query);
+                xhr.open('GET', finalUrl, false);
+
+                try {
+                    xhr.send();
+
+                    if (xhr.status === 200) {
+                        result = JSON.parse(xhr.responseText);
+                    } else {
+                        throw new Error(`Request failed with status ${xhr.status}: ${xhr.statusText}`);
+                    }
+                } catch (error) {
+                    console.error('Synchronous request failed:', error);
+                    result = error;
+                }
+
+                return result;
+            }
+            data.src = syncFetchResult;
             delete data.url;
         }
 
